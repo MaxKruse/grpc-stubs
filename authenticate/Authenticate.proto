@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option go_package = "github.com/maxkruse/grpc-stubs/authenticate";
+option java_multiple_files = true;
+option java_package = "com.maxkruse.grpc.stubs";
+option java_outer_classname = "GrpcStubs";
+
+package authenticate;
+
+message AuthenticateTokenRequest {
+    string token = 1;
+}
+
+// Used for ad-hoc authentication using username and password
+message AuthenticateRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message AuthenticateResponse {
+    bool authenticated = 1;
+}
+
+service Authenticate {
+    rpc AuthenticateToken(AuthenticateTokenRequest) returns (AuthenticateResponse) {}
+    rpc Authenticate(AuthenticateRequest) returns (AuthenticateResponse) {}
+}
