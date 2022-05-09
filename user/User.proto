@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option go_package = "github.com/maxkruse/grpc-stubs/user";
+option java_multiple_files = true;
+option java_package = "com.maxkruse.grpc.stubs";
+option java_outer_classname = "GrpcStubs";
+
+package user;
+
+message UserRequest {
+    string token = 1;
+}
+
+message UserData {
+    int32 id = 1;
+    string name = 2;
+    repeated string permissions = 3;
+}
+
+message UserResponse {
+    UserData user = 1;
+}
+
+message Empty{}
+
+service User {
+    rpc GetUser(UserRequest) returns (UserResponse) {}
+    rpc CreateUser(UserData) returns (UserResponse) {}
+    rpc UpdateUser(UserData) returns (UserResponse) {}
+    rpc DeleteUser(UserData) returns (UserResponse) {}
+    
+    rpc GetUsers(Empty) returns (stream UserResponse) {}
+}
